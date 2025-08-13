@@ -61,7 +61,7 @@ export class StudentService {
       if (!result) {
         throw new NotFoundException({ message: 'No Data Found' });
       }
-      return result
+      return result;
     } catch (err) {
       throw new BadRequestException(err.message);
     }

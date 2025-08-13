@@ -19,7 +19,7 @@ export class StudentController {
     return this.studentService.createStudent(createStudentDto);
   }
 
-  @Patch(':id')
+  @Put(':id')
   updateStudent(@Param('id') id: string , @Body() updateStudentDto: UpdateStudentDto): Promise<Student> {
     if (!id) {
       throw new BadRequestException('Student id is required');
