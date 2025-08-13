@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { StudentService } from './student.service';
 import { Student } from './schemas/student.schema';
@@ -10,8 +10,8 @@ export class StudentController {
   constructor(private ConfigService: ConfigService, private readonly studentService: StudentService) {}
 
   @Get() 
-  getAllStudent(): Promise<Student[]> {
-    return this.studentService.getAllStudent();
+  getAllStudent(@Query('search') search: string): Promise<Student[]> {
+    return this.studentService.getAllStudent(search);
   } 
 
   @Post()

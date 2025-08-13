@@ -19,8 +19,11 @@ export class StudentService {
     }
   }
 
-  async getAllStudent(): Promise<Student[]> {
+  async getAllStudent(search: string): Promise<Student[]> {
     try {
+      if (search) {
+        return await this.stdModel.find({ $text: { $search: search } });
+      }
       return await this.stdModel.find({});
     } catch (err) {
       throw new BadRequestException(err.message);

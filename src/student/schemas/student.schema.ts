@@ -5,13 +5,13 @@ export type StudentDocument = Student & Document;
 
 @Schema()
 export class Student {
-  @Prop({ required: [true, 'Name is required'] })
+  @Prop({ required: [true, 'Name is required'], index: true })
   name: string;
 
   @Prop({ required: [true, 'Age is required'] })
   age: number;
 
-  @Prop({ required: [true, 'City is required'] })
+  @Prop({ required: [true, 'City is required'], index: true })
   city: string;
 
   @Prop({ required: [true, 'Contact Number is required'] })
@@ -19,3 +19,6 @@ export class Student {
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
+
+StudentSchema.index({name: 'text', city: 'text'});
+
