@@ -22,7 +22,12 @@ export class StudentService {
   async getAllStudent(search: string): Promise<Student[]> {
     try {
       if (search) {
-        return await this.stdModel.find({ $text: { $search: search } });
+        return await this.stdModel.find({
+          $or: [
+            { name: new RegExp(search, 'i') },
+            { city: new RegExp(search, 'i') }
+          ]
+        });
       }
       return await this.stdModel.find({});
     } catch (err) {
